@@ -1,29 +1,36 @@
+"""
+projet fait par: Vincent Brouillet
+groupe: 405
+un jeu de devinette
+"""
 import random as r
 
-def start(x, n_e):
-    x = r.randint(1,100)
-    n_e = 0
+
+def start():
     print("J'ai choisi un nombre de 1 à 100.\nÀ vous de le deviner...")
-    essaie(x, n_e)
-def essaie(x, n_e):
-    n_e += 1
-    e = int(input("Entrez votre essaie"))
-    if e > x:
+    devinette(r.randint(1, 100), 0)
+
+
+def devinette(nombre_rechercher, nombre_essaie):
+    nombre_essaie += 1
+    essaie = int(input("Entrez votre essaie"))
+    if essaie > nombre_rechercher:
         print("le nombre est plus petit")
-        essaie(x, n_e)
-    elif e < x:
+        devinette(nombre_rechercher, nombre_essaie)
+    elif essaie < nombre_rechercher:
         print("le nombre est plus grand")
-        essaie(x, n_e)
-    elif e == x:
-        print("Bonne réponse \nnombre d'essaie:", n_e)
-        r = input("Quit? y/n")
-        if r == "n":
-            start(x, n_e)
+        devinette(nombre_rechercher, nombre_essaie)
+    elif essaie == nombre_rechercher:
+        print("Bonne réponse \nnombre d'essaie:", nombre_essaie)
+        nombre_rechercher = input("Quit? y/n")
+        if nombre_rechercher == "n":
+            start()
         else:
             print("au revoir")
             quit()
     else:
         print("error")
-        essaie(x, n_e)
+        devinette(nombre_rechercher, nombre_essaie)
 
-start(0, 0)
+
+start()
